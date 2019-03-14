@@ -332,7 +332,7 @@ class HashTable {
     var table: [[String]]
     
     init() {
-        table = Array(repeating: [], count: 1000)
+        table = Array(repeating: [], count: 10000)
     }
     
     func calculateHashValue(_ input: String) -> Int {
@@ -350,6 +350,7 @@ class HashTable {
     
     func lookup(_ input: String) -> Bool {
         let hashValue = calculateHashValue(input)
+        
         return table[hashValue].contains(input)
         
         
@@ -392,8 +393,12 @@ hashTable.store(string1)
 hashTable.store(string2)
 hashTable.store(string3)
 
-print(HashTable.lookup("Swift"))
-print(HashTable.lookup("UDIACIOUS"))
-print(HashTable.lookup("UDICAIN"))
-print(HashTable.lookup("SWIFTASTIC"))
+print(hashTable.lookup("Swift"))
+print(hashTable.lookup("UDACIOUS"))
+print(hashTable.lookup("UDICAIN"))
+print(hashTable.lookup("SWIFTASTIC"))
+
+
+
+//Trees
 
