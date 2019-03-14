@@ -273,6 +273,127 @@ print(q.peek()!)
 print(q.dequeue()!)
 
 
-//bubble Sort
+//quick sort using recursion
 
+func quicksort(_ input: [Int], low: Int, high: Int) -> [Int] {
+    var result = input
+    
+    if low < high {
+        let pivot = result[high]
+        var i = low
+        
+        for j in low..<high {
+            if result[j] <= pivot {
+                (result[i], result[j]) = (result[j], result[i])
+                i += 1
+            }
+        }
+        (result[i], result[high]) = (result[high], result[i])
+        result = quicksort(result, low: low, high: i - 1)
+        result = quicksort(result, low: i + 1, high: high)
+    }
+    
+    return result
+}
+
+
+//Dictioray  and mapping (set) linear time search
+
+var location = ["North America": ["USA": ["Mountainview"]]]
+
+location["North America"]? ["USA"]?.append("Altanta")
+location["Asia"] = ["India": ["Banglore"]]
+location["Asia"]?["China"]?.append("Shanghai")
+location["Africa"] = ["Egyp": ["Cario"]]
+
+let locationSort = location["North America"]?["USA"]?.sorted()
+
+for city in locationSort! {
+    print(city)
+}
+
+var asiaCities = [String]()
+
+for (country, city) in location["Asia"]! {
+    let cityCountry = "\(country) - \(city)"
+    asiaCities.append(cityCountry)
+    for city in asiaCities.sorted() {
+        print(city)
+    }
+    
+    
+}
+
+//hash mapping constant time search
+class HashTable {
+    
+
+    
+    var table: [[String]]
+    
+    init() {
+        table = Array(repeating: [], count: 1000)
+    }
+    
+    func calculateHashValue(_ input: String) -> Int {
+        return getFirstCharacterValue(input) * 100 + getSecondCharacterValue(input)
+    
+    }
+    
+    func store(_ input: String) {
+        let hashValue = calculateHashValue(input)
+        table[hashValue].append(input)
+        
+    }
+    
+    
+    
+    func lookup(_ input: String) -> Bool {
+        let hashValue = calculateHashValue(input)
+        return table[hashValue].contains(input)
+        
+        
+        
+    }
+
+    
+    
+
+
+    func getFirstCharacterValue(_ input: String) -> Int {
+        if input.count > 0 {
+            return Int(input[input.startIndex].unicodeScalars.first!.value)
+        
+        
+    }
+            return 0
+}
+
+    func getSecondCharacterValue(_ input: String) -> Int {
+        if input.count > 1 {
+            return Int(input[input.startIndex].unicodeScalars.first!.value)
+        
+    }
+            return 0
+}
+    
+    
+    
+    
+}
+//its look up is linear
+let hashTable = HashTable()
+
+let string1 = "Udacity"
+let string2 = "UDACIOUS"
+let string3 = "SWIFTASTIC"
+
+hashTable.store(string1)
+hashTable.store(string2)
+hashTable.store(string3)
+
+print(HashTable.lookup("Swift"))
+print(HashTable.lookup("UDIACIOUS"))
+print(HashTable.lookup("UDICAIN"))
+print(HashTable.lookup("SWIFTASTIC"))
 
